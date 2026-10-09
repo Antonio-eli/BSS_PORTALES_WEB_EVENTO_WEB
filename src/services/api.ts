@@ -30,6 +30,10 @@ interface RegistroFormData {
 interface RegistroInvitado {
   nombre: string;
   correo: string;
+  equipo: String,
+  intereses: string[],
+  nivelExperiencia: string,
+  aceptoTerminos: boolean,
   fechaSalida: string;
   fechaRegreso: string;
   numeroReservacion: string;

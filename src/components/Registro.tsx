@@ -1,226 +1,302 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { User, Mail, Calendar, Plane } from 'lucide-react'
-import Navbar from './Navbar'
+import React, { useState } from 'react';
+import { ChevronDown, ArrowLeft } from 'lucide-react';
+import { enviarRegistroInvitado } from "../services/api.ts";
+import { useNavigate } from 'react-router-dom';
 
-const Registro = () => {
-    const navigate = useNavigate()
+interface FormData {
+    fullName: string;
+    email: string;
+    team: string;
+    interests: string[];
+    experienceLevel: string;
+    agreedToTerms: boolean;
+}
 
-    const [form, setForm] = useState(() => {
-        const saved = localStorage.getItem('registro_draft')
-        if (saved) {
-            try { return JSON.parse(saved) } catch { /* ignore */ }
-        }
-        return {
-            nombre: '',
-            correo: '',
-            fechaSalida: '',
-            fechaRegreso: '',
-            numeroReservacion: '',
-        }
-    })
+const INTEREST_OPTIONS = [
+    'Inteligencia artificial',
+    'Diseño de producto',
+    'Desarrollo de software',
+    'Automatización',
+    'Data analytics',
+    'Innovación y estrategia',
+];
 
-    // Guardar borrador en localStorage cuando cambia el form
-    useEffect(() => {
-        localStorage.setItem('registro_draft', JSON.stringify(form))
-    }, [form])
+const EXPERIENCE_LEVELS = [
+    'Junior (0-2 años)',
+    'Mid-level (2-5 años)',
+    'Senior (5+ años)',
+    'Líder / Manager',
+];
 
-    const [errors, setErrors] = useState<Record<string, string>>({})
-    const [generalError, setGeneralError] = useState('')
+export const RegistroMakers: React.FC = () => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState<FormData>({
+        fullName: '',
+        email: '',
+        team: '',
+        interests: [],
+        experienceLevel: '',
+        agreedToTerms: false,
+    });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
-        setErrors({ ...errors, [e.target.name]: '' })
-        if (generalError) setGeneralError('')
-    }
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [generalError, setGeneralError] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    // Ajustado para manejar correctamente el tipo checkbox
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
+        const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
+
+        setFormData({
+            ...formData,
+            [name]: type === 'checkbox' ? checked : value
+        });
+
+        setErrors({ ...errors, [name]: '' });
+        if (generalError) setGeneralError('');
+    };
+
+    const toggleInterest = (interest: string) => {
+        setFormData((prev) => {
+            const exists = prev.interests.includes(interest);
+            return {
+                ...prev,
+                interests: exists
+                    ? prev.interests.filter((item) => item !== interest)
+                    : [...prev.interests, interest],
+            };
+        });
+    };
 
     const validate = () => {
-        const newErrors: Record<string, string> = {}
-        if (!form.nombre.trim()) newErrors.nombre = 'Campo requerido'
-        if (!form.correo.trim()) newErrors.correo = 'Campo requerido'
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo))
-            newErrors.correo = 'Correo inválido'
-        if (!form.fechaSalida) newErrors.fechaSalida = 'Campo requerido'
-        if (!form.fechaRegreso) newErrors.fechaRegreso = 'Campo requerido'
-        if (!form.numeroReservacion.trim())
-            newErrors.numeroReservacion = 'Campo requerido'
-        return newErrors
-    }
+        const newErrors: Record<string, string> = {};
+        if (!formData.fullName.trim()) newErrors.fullName = 'Campo requerido';
+        if (!formData.email.trim()) newErrors.email = 'Campo requerido';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+            newErrors.email = 'Correo inválido';
+        if (!formData.team) newErrors.team = 'Campo requerido';
+        if (formData.interests.length === 0) newErrors.interests = 'Campo requerido';
+        if (!formData.experienceLevel.trim())
+            newErrors.experienceLevel = 'Campo requerido';
+        if (!formData.agreedToTerms)
+            newErrors.agreedToTerms = 'Campo requerido';
+        return newErrors;
+    };
 
-    const handleSubmit = () => {
-        const newErrors = validate()
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors)
-            setGeneralError('Es necesario que introduzcas todos los datos para seguir adelante')
-            return
+            setErrors(newErrors);
+            setGeneralError('Es necesario que introduzcas todos los datos para seguir adelante');
+            return;
         }
-        setGeneralError('')
-        
-        // Guardar datos en sessionStorage para usarlos en el siguiente paso
-        sessionStorage.setItem('registroInvitado', JSON.stringify(form))
-        // Limpiar borrador al avanzar
-        localStorage.removeItem('registro_draft')
-        
-        // Navegar a selección de actividades
-        navigate('/registro/actividades')
-    }
+        setGeneralError('');
+
+        try {
+            setLoading(true);
+            setError('');
+            const registroCompleto = {
+                nombre: formData.fullName,
+                correo: formData.email,
+                equipo: formData.team, // Corregido: antes enviaba formData.email aquí
+                intereses: formData.interests,
+                nivelExperiencia: formData.experienceLevel,
+                aceptoTerminos: formData.agreedToTerms,
+                fechaSalida: '',
+                fechaRegreso: '',
+                numeroReservacion: '',
+                actividades: []
+            };
+            await enviarRegistroInvitado(registroCompleto);
+            navigate('/inicio');
+        } catch (err: any) {
+            console.error('Error enviando registro:', err);
+            setError(err.message || 'Error al enviar el registro. Inténtalo de nuevo.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
-        <div className="min-h-screen bg-[#0a0e1a] flex flex-col items-center">
+        <section className="w-full min-h-screen py-12 px-4 flex justify-center items-center bg-[#0b0c10]">
+            <div className="w-full max-w-xl rounded-2xl border border-gray-800 bg-[#121318] p-6 text-gray-200 shadow-xl md:p-8">
 
-            <Navbar />
+                {/* Botón de Regreso */}
+                <button
+                    onClick={() => navigate('/inicio')}
+                    className="flex items-center gap-2 mb-6 text-sm text-gray-400 hover:text-white transition-colors group cursor-pointer bg-transparent border-none p-0"
+                >
+                    <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+                    Volver a la página principal
+                </button>
 
-            {/* Contenido */}
-            <div className="flex flex-col px-5 pt-24 pb-10 gap-8 w-full max-w-md">
-
-                {/* Título */}
-                <h1 className="font-orbitron font-semibold text-[2.25rem] leading-[2.5rem] tracking-normal text-center bg-gradient-to-r from-[#51A2FF] to-[#C27AFF] bg-clip-text text-transparent">
-                    Registro
-                </h1>
-
-                <p className="font-montserrat font-normal text-white/60 text-[1rem] leading-[1.3125rem] tracking-normal text-center w-[20.8125rem] h-[2.5625rem] mx-auto">
-                    Antes de continuar con el formulario, debes tener tu itinerario de vuelo.
-                </p>
-
-                {/* Sección: Información del invitado */}
-                <div className="flex flex-col gap-4">
-                    <h2 className="font-montserrat font-bold text-[1.25rem] leading-[1.75rem] tracking-normal text-center bg-gradient-to-r from-[#51A2FF] to-[#C27AFF] bg-clip-text text-transparent">
-                        Información del invitado
+                {/* Header */}
+                <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-white tracking-tight sm:text-3xl">
+                        Únete a la comunidad
                     </h2>
-
-                    {/* Nombre completo */}
-                    <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-3 bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                            <User size={18} className="text-blue-400 flex-shrink-0" />
-                            <input
-                                type="text"
-                                name="nombre"
-                                placeholder="Nombre completo*"
-                                value={form.nombre}
-                                onChange={handleChange}
-                                className="bg-transparent text-white placeholder-white/40 font-montserrat text-sm w-full outline-none"
-                            />
-                        </div>
-                        {errors.nombre && (
-                            <span className="text-red-400 text-xs font-montserrat px-1">{errors.nombre}</span>
-                        )}
-                    </div>
-
-                    {/* Correo corporativo */}
-                    <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-3 bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                            <Mail size={18} className="text-blue-400 flex-shrink-0" />
-                            <input
-                                type="email"
-                                name="correo"
-                                placeholder="Correo corporativo*"
-                                value={form.correo}
-                                onChange={handleChange}
-                                className="bg-transparent text-white placeholder-white/40 font-montserrat text-sm w-full outline-none"
-                            />
-                        </div>
-                        {errors.correo && (
-                            <span className="text-red-400 text-xs font-montserrat px-1">{errors.correo}</span>
-                        )}
-                    </div>
-                </div>
-
-                {/* Sección: Vuelos */}
-                <div className="flex flex-col gap-4">
-                    <h2 className="font-montserrat font-semibold text-base text-center bg-gradient-to-r from-[#51A2FF] to-[#C27AFF] bg-clip-text text-transparent">
-                        Vuelos
-                    </h2>
-
-                    {/* Fecha de salida */}
-                    <div className="flex flex-col gap-1">
-                        <label className="font-montserrat text-white/60 text-sm px-1 text-left">
-                            Fecha de salida*
-                        </label>
-                        <div className="flex items-center gap-3 bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                            <Calendar size={18} className="text-blue-400 flex-shrink-0" />
-                            <input
-                                type="date"
-                                name="fechaSalida"
-                                placeholder="Fecha de salida*"
-                                value={form.fechaSalida}
-                                onChange={handleChange}
-                                className="bg-transparent text-white placeholder-white/40 font-montserrat text-sm w-full outline-none [color-scheme:dark]"
-                            />
-                        </div>
-                        {errors.fechaSalida && (
-                            <span className="text-red-400 text-xs font-montserrat px-1">{errors.fechaSalida}</span>
-                        )}
-                    </div>
-
-                    {/* Fecha de regreso */}
-                    <div className="flex flex-col gap-1">
-                        <label className="font-montserrat text-white/60 text-sm px-1 text-left">
-                            Fecha de regreso*
-                        </label>
-                        <div className="flex items-center gap-3 bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                            <Calendar size={18} className="text-blue-400 flex-shrink-0" />
-                            <input
-                                type="date"
-                                name="fechaRegreso"
-                                placeholder="Fecha de regreso*"
-                                value={form.fechaRegreso}
-                                onChange={handleChange}
-                                className="bg-transparent text-white placeholder-white/40 font-montserrat text-sm w-full outline-none [color-scheme:dark]"
-                            />
-                        </div>
-                        {errors.fechaRegreso && (
-                            <span className="text-red-400 text-xs font-montserrat px-1">{errors.fechaRegreso}</span>
-                        )}
-                    </div>
-
-                    {/* Número de reservación */}
-                    <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-3 bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                            <Plane size={18} className="text-blue-400 flex-shrink-0" />
-                            <input
-                                type="text"
-                                name="numeroReservacion"
-                                placeholder="Número de reservación*"
-                                value={form.numeroReservacion}
-                                onChange={handleChange}
-                                className="bg-transparent text-white placeholder-white/40 font-montserrat text-sm w-full outline-none"
-                            />
-                        </div>
-                        {errors.numeroReservacion && (
-                            <span className="text-red-400 text-xs font-montserrat px-1">{errors.numeroReservacion}</span>
-                        )}
-                    </div>
-
-                    {/* Nota informativa */}
-                    <div className="bg-[#0d1229] border border-white/10 rounded-xl px-4 py-4">
-                        <p className="font-montserrat text-white/60 text-xs leading-relaxed text-center">
-                            VUELOS AUTORIZADOS SOLO POR CONVENIO CON{' '}
-                            <span className="text-blue-400"> VIVAAEROBUS®.</span>{' '}
-                            PARA REALIZAR LA COMPRA DE TU VUELO, SOLICÍTALO A TU ASISTENTE O ADMINISTRADOR. 
-                        </p>
-                    </div>
-                </div>
-
-                {/* Mensaje general de error */}
-                {generalError && (
-                    <p className="text-red-400 text-sm font-montserrat text-center">
-                        {generalError}
+                    <p className="mt-2 text-sm text-gray-400">
+                        Completa tu información para conectar con otros makers de Totalplay.
                     </p>
+                </div>
+
+                {/* Nombre completo */}
+                <div className="mb-4">
+                    <label className="mb-1.5 block text-xs font-medium text-gray-300">
+                        Nombre completo <span className="text-pink-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Nombre completo"
+                        className="w-full rounded-xl border border-gray-800 bg-[#1a1b22] px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none transition-colors"
+                    />
+                    {errors.fullName && (
+                        <span className="text-red-400 text-xs font-montserrat px-1 block mt-1">{errors.fullName}</span>
+                    )}
+                </div>
+
+                {/* Correo corporativo */}
+                <div className="mb-4">
+                    <label className="mb-1.5 block text-xs font-medium text-gray-300">
+                        Correo corporativo <span className="text-pink-500">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Correo corporativo"
+                        className="w-full rounded-xl border border-gray-800 bg-[#1a1b22] px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none transition-colors"
+                    />
+                    {errors.email && (
+                        <span className="text-red-400 text-xs font-montserrat px-1 block mt-1">{errors.email}</span>
+                    )}
+                </div>
+
+                {/* Área o equipo */}
+                <div className="mb-4">
+                    <label className="mb-1.5 block text-xs font-medium text-gray-300">
+                        Área o equipo <span className="text-pink-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="team"
+                        value={formData.team}
+                        onChange={handleInputChange}
+                        placeholder="Área o equipo"
+                        className="w-full rounded-xl border border-gray-800 bg-[#1a1b22] px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none transition-colors"
+                    />
+                    {errors.team && (
+                        <span className="text-red-400 text-xs font-montserrat px-1 block mt-1">{errors.team}</span>
+                    )}
+                </div>
+
+                {/* Intereses */}
+                <div className="mb-4">
+                    <label className="mb-2 block text-xs font-medium text-gray-300">
+                        Intereses <span className="text-pink-500">*</span>
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                        {INTEREST_OPTIONS.map((interest) => {
+                            const isSelected = formData.interests.includes(interest);
+                            return (
+                                <button
+                                    key={interest}
+                                    type="button"
+                                    onClick={() => toggleInterest(interest)}
+                                    className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-200 border cursor-pointer ${
+                                        isSelected
+                                            ? 'border-pink-500 bg-pink-500/10 text-pink-400'
+                                            : 'border-gray-800 bg-[#1a1b22] text-gray-300 hover:border-gray-700'
+                                    }`}
+                                >
+                                    {interest}
+                                </button>
+                            );
+                        })}
+                    </div>
+                    {errors.interests && (
+                        <span className="text-red-400 text-xs font-montserrat px-1 block mt-1">{errors.interests}</span>
+                    )}
+                </div>
+
+                {/* Nivel de experiencia */}
+                <div className="mb-6">
+                    <label className="mb-1.5 block text-xs font-medium text-gray-300">
+                        Nivel de experiencia <span className="text-pink-500">*</span>
+                    </label>
+                    <div className="relative">
+                        <select
+                            name="experienceLevel"
+                            value={formData.experienceLevel}
+                            onChange={handleInputChange}
+                            className="w-full appearance-none rounded-xl border border-gray-800 bg-[#1a1b22] px-4 py-3 pr-10 text-sm text-gray-300 focus:border-pink-500 focus:outline-none transition-colors cursor-pointer"
+                        >
+                            <option value="" disabled>
+                                Selecciona tu nivel
+                            </option>
+                            {EXPERIENCE_LEVELS.map((level) => (
+                                <option key={level} value={level} className="bg-[#1a1b22] text-white">
+                                    {level}
+                                </option>
+                            ))}
+                        </select>
+                        <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    </div>
+                    {errors.experienceLevel && (
+                        <span className="text-red-400 text-xs font-montserrat px-1 block mt-1">{errors.experienceLevel}</span>
+                    )}
+                </div>
+
+                {/* Checkbox Términos */}
+                <div className="flex items-start gap-3 mb-4">
+                    <input
+                        type="checkbox"
+                        id="agreedToTerms"
+                        name="agreedToTerms"
+                        checked={formData.agreedToTerms}
+                        onChange={handleInputChange}
+                        className="mt-1 h-4 w-4 rounded border-gray-700 bg-[#1a1b22] text-pink-500 focus:ring-0 cursor-pointer"
+                    />
+                    <label htmlFor="agreedToTerms" className="text-xs text-gray-400 leading-relaxed cursor-pointer select-none">
+                        Acepto el aviso de privacidad de Totalplay y el uso de mis datos para la comunidad Total Makers. <span className="text-pink-500">*</span>
+                    </label>
+                </div>
+                {errors.agreedToTerms && (
+                    <span className="text-red-400 text-xs font-montserrat px-1 block mb-4">{errors.agreedToTerms}</span>
                 )}
 
-                {/* Botón continuar */}
+                {/* Errores Generales */}
+                {generalError && (
+                    <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                        <p className="text-red-400 text-xs font-montserrat text-center">{generalError}</p>
+                    </div>
+                )}
+
+                {error && (
+                    <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                        <p className="text-red-400 text-xs font-montserrat text-center">{error}</p>
+                    </div>
+                )}
+
+                {/* Botón Submit */}
                 <button
                     onClick={handleSubmit}
-                    className="w-full py-4 rounded-full border border-purple-500 text-white font-montserrat
-            font-semibold text-sm tracking-wide
-            hover:bg-purple-500/10 transition-all duration-300"
+                    disabled={loading}
+                    className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Continuar con las actividades
+                    {loading ? 'Enviando...' : 'Enviar registro'}
                 </button>
 
             </div>
-        </div>
-    )
-}
+        </section>
+    );
+};
 
-export default Registro
+export default RegistroMakers;

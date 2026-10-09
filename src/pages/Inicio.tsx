@@ -1,23 +1,45 @@
 import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import HotelInfo from '../components/HotelInfo';
-import ResortMap from '../components/ResortMap';
-import DressCode from '../components/DressCode';
-import Itinerario from '../components/Itinerario';
-import CTAFinal from '../components/CTAFinal';
-import GaleriaMomentos from '../components/GaleriaMomentos';
+import HeroMakers from '../components/HeroMakers';
+import TotalMakers from "../components/TotalMakers.tsx";
+import VideoMakers from "../components/VideoMakers.tsx";
+import VocesMakers from "../components/VocesMakers.tsx";
+import AgendaMakers from "../components/AgendaMakers.tsx";
+import BanderaMakers from "../components/BanderaMakers.tsx";
+import InsigniasMakers from "../components/InsigniasMakers.tsx";
+import ComunidadMakers from "../components/ComunidadMakers.tsx";
+import HistoriasMakers from "../components/HistoriasMakers.tsx";
 
 const Inicio = () => {
     return (
         <div className="min-h-screen">
             <Navbar />
-            <Hero />
-            <HotelInfo />
-            <Itinerario />
-            <DressCode />
-            <ResortMap />
-            <CTAFinal />
-            <GaleriaMomentos />
+
+            <div id="evento">
+                <HeroMakers />
+                <TotalMakers />
+            </div>
+
+            <div id="historias">
+                <HistoriasMakers />
+            </div>
+
+            <div id="experiencia">
+                <VideoMakers />
+                <VocesMakers />
+            </div>
+
+            <div id="agenda">
+                <AgendaMakers />
+                <BanderaMakers />
+            </div>
+
+            <div id="insignias">
+                <InsigniasMakers />
+            </div>
+
+            <div id="comunidad">
+                <ComunidadMakers />
+            </div>
         </div>
     );
 };
