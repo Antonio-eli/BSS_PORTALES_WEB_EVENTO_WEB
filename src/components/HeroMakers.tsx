@@ -1,6 +1,7 @@
 import React from 'react';
 import heroBg from '../assets/hero.avif';
 import LogoTotalMakers from '../assets/Logo_TotalMakers.svg';
+//import Exclude from '../assets/Exclude.avif';
 
 export const HeroMakers: React.FC = () => {
     const handleScrollToAgenda = (e: React.MouseEvent) => {
@@ -29,7 +30,7 @@ export const HeroMakers: React.FC = () => {
             {/* Frame 3: Superior Derecha (Insignia Vectorial 49x49px) */}
             <div className="w-full max-w-[1306px] h-[49px] flex justify-end items-start gap-[10px]">
                 <div className="relative w-[49px] h-[49px] flex items-center justify-center flex-shrink-0">
-                    {/* Base vectorial de la figura */}
+                    {/* Base vectorial de la figura en blanco sólido */}
                     <svg
                         width="49"
                         height="49"
@@ -38,7 +39,8 @@ export const HeroMakers: React.FC = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-[49px] h-[49px]"
                     >
-                        <g fill="#FFFFFF" fillOpacity="0.25">
+
+                        <g fill="#FFFFFF">
                             <rect x="20.915" y="0" width="7.17" height="49" rx="2" />
                             <rect x="0" y="20.915" width="49" height="7.17" rx="2" />
                             <rect
@@ -60,7 +62,7 @@ export const HeroMakers: React.FC = () => {
                         </g>
                     </svg>
 
-                    <span className="absolute z-10 text-white font-mono font-bold text-[12px] leading-none tracking-tight select-none">
+                    <span className="absolute z-10 text-black font-mono font-bold text-[12px] leading-none tracking-tight select-none">
                         &lt;/&gt;
                     </span>
                 </div>
@@ -70,6 +72,7 @@ export const HeroMakers: React.FC = () => {
             <div className="w-full max-w-[1306px] flex flex-col items-start gap-[36px] my-auto">
                 {/* Subtítulo Top: Logo + Línea Gradiente + Edición 2026 */}
                 <div className="flex items-center gap-[12px] h-[36px] py-[8px]">
+                    <span className="w-[28px] h-[1px] bg-gradient-to-r from-transparent to-white rounded-[2px]" />
                     <img
                         src={LogoTotalMakers}
                         alt="Total Makers Logo"
@@ -79,7 +82,6 @@ export const HeroMakers: React.FC = () => {
                         }}
                     />
                     <div className="flex items-center gap-[10px]">
-                        <span className="w-[28px] h-[1px] bg-gradient-to-r from-transparent to-white rounded-[2px]" />
                         <span className="font-normal text-[14px] leading-[20px] text-white tracking-wide">
                             · Edición 2026
                         </span>
@@ -115,13 +117,20 @@ export const HeroMakers: React.FC = () => {
                                 />
                             </svg>
                         </div>
-                        <span>16 Octubre, 2026</span>
+                        <span>22 Octubre, 2026</span>
                     </div>
 
-                    <div className="flex items-center gap-[8px] h-[24px]">
+                    {/* Enlace Interactivo de Ubicación */}
+                    <a
+                        href="https://maps.app.goo.gl/S7bYUL6PzyDpR2YV8"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-[8px] h-[24px] hover:text-[#38BDF8] transition-colors group cursor-pointer"
+                        title="Ver ubicación en Google Maps"
+                    >
                         <div className="w-[24px] h-[24px] flex items-center justify-center">
                             <svg
-                                className="w-[20px] h-[20px] text-[#38BDF8]"
+                                className="w-[20px] h-[20px] text-[#38BDF8] group-hover:scale-110 transition-transform"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -140,8 +149,10 @@ export const HeroMakers: React.FC = () => {
                                 />
                             </svg>
                         </div>
-                        <span>El Encanto Salón Campestre</span>
-                    </div>
+                        <span className="underline decoration-[#38BDF8]/40 group-hover:decoration-[#38BDF8] underline-offset-4">
+                            El Encanto Salón Campestre
+                        </span>
+                    </a>
 
                     <div className="flex items-center gap-[8px] h-[24px]">
                         <div className="w-[24px] h-[24px] flex items-center justify-center">

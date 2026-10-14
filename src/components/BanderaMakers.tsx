@@ -4,22 +4,22 @@ const steps = [
     {
         step: 'Paso 01',
         symbol: '◎',
-        description: 'Busca la mesa con el banderín del maker que te interese conocer.',
+        description: 'Busca el escritorio  con el banderín del Total Maker que te interesa',
     },
     {
         step: 'Paso 02',
         symbol: '◈',
-        description: 'Escanea el código QR en el banderín para ver sus proyectos y experiencia.',
+        description: 'Acércate, preséntate y cuéntale en qué área trabajas',
     },
     {
         step: 'Paso 03',
         symbol: '◇',
-        description: 'Inicia la conversación sobre sus desarrollos, tecnologías e ideas.',
+        description: 'Haz tu pregunta, comparte tu proyecto o pide orientación',
     },
     {
         step: 'Paso 04',
         symbol: '◉',
-        description: 'Conecta y intercambia datos para futuras colaboraciones e impacto.',
+        description: 'Conecta en la comunidad para seguir la conversación',
     },
 ];
 
@@ -52,7 +52,7 @@ const BanderaMakers = () => {
                                 Identifica a los Total Makers
                             </h2>
                             <p className="font-normal text-[16px] leading-[28px] text-white">
-                                En cada mesa de los Total Makers encontrarás un banderín distintivo con información clave sobre su proyecto e iniciativas.
+                                En cada escritorio de los Total Makers encontrarás un banderín con su nombre y especialidad. Acércate, hazles preguntas, comparte tu idea o simplemente escucha su experiencia. Están ahí para conectar contigo.
                             </p>
                         </div>
 
@@ -90,9 +90,9 @@ const BanderaMakers = () => {
                 </div>
 
                 {/* Banner Informativo Inferior */}
-                <div className="w-full bg-[#367BFF]/[0.06] border border-[#367BFF]/15 rounded-[16px] p-[20px_24px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)] flex items-center justify-center text-center">
+                <div className="w-full max-w-[1332px] min-h-[82px] bg-[rgba(54,123,255,0.06)] border border-[rgba(54,123,255,0.15)] rounded-[16px] p-[20px_24px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)] flex items-center justify-center text-center">
                     <p className="font-bold text-[16px] leading-[20px] text-[#35D8FF] max-w-[1134px]">
-                        ¿No sabes con quién hablar? Acércate a cualquier mesa para resolver tus dudas e interactuar con la comunidad.
+                        ¿No sabes con quién hablar? Acércate a cualquier mesa con banderín y cuéntales en qué área trabajas. Ellos te orientarán hacia la persona o sesión indicada para ti.
                     </p>
                 </div>
 

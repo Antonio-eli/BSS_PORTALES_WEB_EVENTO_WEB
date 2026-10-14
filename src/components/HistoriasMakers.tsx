@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import RM from '../assets/RM.avif';
 import JC from '../assets/JC.avif';
 import RE from '../assets/RE.avif';
@@ -9,6 +9,14 @@ import MC from '../assets/MC.avif';
 import E from '../assets/E.avif';
 import AS from '../assets/AS.avif';
 import RC from '../assets/RC.avif';
+import FJ from '../assets/FJ.avif';
+import MQ from '../assets/MQ.avif';
+import FC from '../assets/FC.avif';
+import RZ from '../assets/RZ.avif';
+import NOG from '../assets/NOG.avif';
+import AND from '../assets/AND.avif';
+import MAR from '../assets/MAR.avif';
+import CD from '../assets/CD.avif';
 
 export interface MakerCardItem {
     id: string;
@@ -143,6 +151,102 @@ const defaultMakersData: MakerCardItem[] = [
         gradientBackground:
             'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(253, 198, 1, 0.1) 85.29%, rgba(253, 198, 1, 0) 100.08%)',
     },
+    {
+        id: '11',
+        name: 'Felipe Jiménez',
+        role: 'Lead AI Strategist',
+        roleColor: '#97E8CF', // Dewdrops Aqua
+        project: 'Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me ayuda a diseñar y probar soluciones basadas en modelos y agentes, agilizando la creación de prototipos y la evaluación de resultados. Mi enfoque se concentra en validar su funcionamiento, precisión, seguridad y viabilidad técnica.',
+        tools: ['Claude Code', 'Codex'],
+        avatarUrl: FJ,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(151, 232, 207, 0.1) 85.29%, rgba(151, 232, 207, 0) 100.08%)',
+    },
+    {
+        id: '12',
+        name: 'Mariana Quintos',
+        role: 'Executive Leadership · Marketplace',
+        roleColor: '#00B8DB', // River Blue
+        project: 'Nuevo Portal Totalplay',
+        quote: 'La inteligencia artificial me permite analizar información del marketplace, identificar oportunidades y convertir datos en decisiones estratégicas. También agiliza la preparación de reportes, la priorización de iniciativas y el seguimiento de los objetivos del equipo.',
+        tools: ['ChatGPT Business', 'Notion AI.'],
+        avatarUrl: MQ,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(0, 211, 243, 0.1) 85.29%, rgba(0, 211, 243, 0) 100.08%)',
+    },
+    {
+        id: '13',
+        name: 'Fernando Campos',
+        role: 'Executive Leadership · Telco Systems, FFM & OSS',
+        roleColor: '#38DD02', // Poison Green
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me ayuda a integrar información de distintos sistemas, analizar incidencias y visualizar dependencias operativas. Esto facilita la toma de decisiones, la priorización de iniciativas y la coordinación de soluciones para FFM, OSS y los sistemas de telecomunicaciones.',
+        tools: ['Microsoft 365 Copilot', 'Notion'],
+        avatarUrl: FC,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(59, 242, 0, 0.1) 85.29%, rgba(59, 242, 0, 0) 100.08%)',
+    },
+    {
+        id: '14',
+        name: 'Ramzy Hurrle',
+        role: 'UI/UX Manager',
+        roleColor: '#186FEA', // Brilliant Blue
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial fortalece mi proceso de diseño al facilitar el análisis de requerimientos, la creación de flujos y la generación de prototipos. Esto me permite enfocar mi criterio en la estrategia de experiencia, la usabilidad y la calidad de las interfaces.',
+        tools: ['Figma Make', 'ChatGPT Business'],
+        avatarUrl: RZ,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(94, 155, 222, 0.1) 85.29%, rgba(94, 155, 222, 0) 100.08%)',
+    },
+    {
+        id: '15',
+        name: 'Mariana Nogal',
+        role: 'Executive Leadership · Artificial Intelligence, Data & Big Data',
+        roleColor: '#EEEB46', // Summer Sun
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me permite evaluar oportunidades, estructurar casos de uso y acelerar la definición de iniciativas estratégicas. Mi experiencia se enfoca en asegurar que cada solución genere valor, sea medible y se implemente bajo criterios responsables de gobierno y seguridad.',
+        tools: ['ChatGPT Business', 'Notion AI'],
+        avatarUrl: NOG,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(238, 235, 70, 0.1) 85.29%, rgba(238, 235, 70, 0) 100.08%)',
+    },
+    {
+        id: '16',
+        name: 'Andrea Figueroa',
+        role: 'Executive Leadership · Financial Systems, Credit & Collections',
+        roleColor: '#00D3F3', // Bluefish
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me ayuda a analizar procesos de cobranza, identificar oportunidades de automatización y estructurar requerimientos con mayor rapidez. Esto facilita la toma de decisiones y la evolución de soluciones orientadas a mejorar la eficiencia operativa y el seguimiento.',
+        tools: ['Microsoft 365 Copilot', 'Chat GPT'],
+        avatarUrl: AND,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(0, 211, 243, 0.1) 85.29%, rgba(0, 211, 243, 0) 100.08%)',
+    },
+    {
+        id: '17',
+        name: 'Marisol Laborie',
+        role: 'Customer Journey & Process Orchestration Lead',
+        roleColor: '#F9459E', // Fandango Pink
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me permite analizar procesos y recorridos de cliente, detectar puntos de fricción y organizar hallazgos de diferentes fuentes. Así puedo concentrarme en diseñar experiencias más claras, eficientes y alineadas con las necesidades de los usuarios.',
+        tools: ['Miro AI', 'ChatGPT Business'],
+        avatarUrl: MAR,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(252, 0, 119, 0.1) 85.29%, rgba(252, 0, 119, 0) 100.08%)',
+    },
+    {
+        id: '18',
+        name: 'César Delgado',
+        role: 'Marketplace Systems Lead',
+        roleColor: '#BD45FF', // Purple Flower
+        project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
+        quote: 'La inteligencia artificial me ayuda a acelerar el desarrollo de funcionalidades para Marketplace, revisar integraciones y generar pruebas técnicas. Esto me permite enfocarme en asegurar un código estable, escalable y alineado con las necesidades del negocio.',
+        tools: ['Claude Code', 'GitHub Copilot'],
+        avatarUrl: CD,
+        gradientBackground:
+            'linear-gradient(135.12deg, rgba(0, 0, 0, 0.2) 41.27%, rgba(151, 57, 239, 0.1) 85.29%, rgba(151, 57, 239, 0) 100.08%)',
+    },
 ];
 
 interface MakersCarouselProps {
@@ -153,7 +257,9 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
                                                                    makers = defaultMakersData,
                                                                }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
 
+    // Función de Scroll Manual
     const scroll = (direction: 'left' | 'right') => {
         if (scrollRef.current) {
             const scrollAmount = direction === 'left' ? -338 : 338;
@@ -161,19 +267,35 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
         }
     };
 
+    // Efecto para Autoscroll / Movimiento Automático
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!isPaused && scrollRef.current) {
+                const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+                // Si llega al final del scroll, regresa suavemente al inicio
+                if (scrollLeft + clientWidth >= scrollWidth - 10) {
+                    scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    scrollRef.current.scrollBy({ left: 338, behavior: 'smooth' });
+                }
+            }
+        }, 2500); // Avanza automáticamente cada 3.5 segundos
+
+        return () => clearInterval(interval);
+    }, [isPaused]);
+
     return (
         <section
             id="historias"
             className="w-full max-w-[1280px] mx-auto py-12 px-4 md:px-8 font-['Montserrat',sans-serif] scroll-mt-[68px]"
         >
-            {/* Frame 5: Encabezado de la Sección */}
+            {/* Encabezado de la Sección */}
             <div className="w-full max-w-[577px] mx-auto flex flex-col items-center text-center mb-6">
-                {/* Subtítulo: Nuestras historias de éxito */}
-                <span className="font-bold text-[18px] leading-[22px] text-[#FFD024] text-center tracking-wide">
+                <span className="font-bold text-[28px] leading-[22px] text-[#FFD024] text-center tracking-wide">
                     Nuestras historias de éxito
                 </span>
 
-                {/* Frame 22: Título H2 */}
                 <div className="w-full max-w-[577px] min-h-[100px] sm:min-h-[147px] flex items-center justify-center mt-2">
                     <h2 className="font-bold text-[32px] sm:text-[40px] leading-[40px] sm:leading-[49px] text-white text-center">
                         Conoce a los Total Makers detrás de la transformación
@@ -181,9 +303,13 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
                 </div>
             </div>
 
-            {/* Frame 10: Contenedor con Scroll Horizontal (Manual + Touch) */}
+            {/* Contenedor con Scroll Horizontal (Automático + Manual + Pausa en Hover) */}
             <div
                 ref={scrollRef}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={() => setIsPaused(true)}
+                onTouchEnd={() => setIsPaused(false)}
                 className="flex items-start gap-[20px] overflow-x-auto pt-[50px] pb-4 scrollbar-none snap-x snap-mandatory cursor-grab active:cursor-grabbing"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
@@ -218,13 +344,13 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
                                 background: maker.gradientBackground,
                             }}
                         >
-                            {/* Información Personal: Nombre + Rol */}
-                            <div className="flex flex-col items-center text-center w-full h-[45px] justify-center flex-shrink-0">
+                            {/* Información Personal */}
+                            <div className="flex flex-col items-center text-center w-full min-h-[45px] justify-center flex-shrink-0 px-1">
                                 <h3 className="font-bold text-[20px] leading-[24px] text-white truncate max-w-full">
                                     {maker.name}
                                 </h3>
                                 <span
-                                    className="font-bold text-[14px] leading-[20px] mt-0.5 truncate max-w-full"
+                                    className="font-bold text-[14px] leading-[18px] mt-0.5 text-center max-w-full line-clamp-2 break-words"
                                     style={{ color: maker.roleColor }}
                                 >
                                     {maker.role}
@@ -238,9 +364,9 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
                                 </p>
                             </div>
 
-                            {/* Párrafo / Testimonio con Scroll Interno Discreto */}
+                            {/* Testimonio */}
                             <div
-                                className="w-full h-[195px] my-auto overflow-y-auto pr-1 flex items-start"
+                                className="w-full h-[180px] my-auto overflow-y-auto pr-1 flex items-start"
                                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             >
                                 <p className="font-normal text-[14px] leading-[20px] text-white/90 text-left my-auto">
@@ -264,7 +390,7 @@ export const HistoriasMakers: React.FC<MakersCarouselProps> = ({
                 ))}
             </div>
 
-            {/* Botones de navegación inferiores (Centrados) */}
+            {/* Botones de navegación inferiores */}
             <div className="flex justify-center items-center gap-4 mt-6">
                 <button
                     onClick={() => scroll('left')}

@@ -17,12 +17,14 @@ interface AgendaTag {
 interface AgendaItem {
     id: string;
     time: string;
+    endTime?: string;
     title: string;
     tags: AgendaTag[];
     description: string;
     speaker?: string;
     location?: string;
     isBreak?: boolean;
+    isHighlight?: boolean;
 }
 
 const agendaData: AgendaItem[] = [
@@ -34,12 +36,12 @@ const agendaData: AgendaItem[] = [
             { label: 'Recepción', type: 'recepcion' },
             { label: 'Apertura', type: 'apertura' },
         ],
-        description: 'Bienvenida institucional, presentación de la agenda',
+        description: 'Acceso y bienvenida de asistentes.',
         location: 'El Encanto Salón Campestre',
     },
     {
         id: '2',
-        time: '08:40',
+        time: '09:00',
         title: 'Apertura y propósito del evento',
         tags: [{ label: 'Apertura', type: 'apertura' }],
         description: 'Bienvenida institucional, presentación de la agenda',
@@ -48,121 +50,123 @@ const agendaData: AgendaItem[] = [
     {
         id: '3',
         time: '09:10',
-        title: 'Sales Cloud de Salesforce',
+        title: 'Caso de éxito IPTV',
         tags: [{ label: 'Conferencia', type: 'conferencia' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Salesforce',
+        description: 'Experiencia y evolución del ponente',
+        speaker: 'Mike Nava',
     },
     {
         id: '4',
-        time: '09:40',
-        title: 'AWS Cloud',
+        time: '09:30',
+        title: 'ClaudeForce de Salesforce',
         tags: [{ label: 'Conferencia', type: 'conferencia' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'AWS',
+        description: 'Presentación de capacidades y oportunidades de Sales Cloud',
+        speaker: 'Anaid Moncada y Christian Lozano',
     },
     {
         id: '5',
-        time: '10:10',
-        title: 'Kiro: Desarrollo asistido por IA',
-        tags: [{ label: 'Conferencia', type: 'conferencia' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'AWS',
+        time: '10:00',
+        title: 'App de Ventas',
+        tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
+        description: 'Experiencia y evolución de la nueva solución comercial',
+        speaker: 'Ana Ceci, Reynaldo Escobar , Omar Morgado y Felipe Jimenez',
     },
     {
         id: '6',
-        time: '10:40',
-        title: 'Sesión Deloitte',
+        time: '10:20',
+        title: 'AWS Kiro',
         tags: [{ label: 'Conferencia', type: 'conferencia' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Deloitte',
+        description: 'Nuevas formas de acelerar el desarrollo con IA',
+        speaker: 'Efraín Castilla',
     },
     {
         id: '7',
-        time: '11:10',
-        title: 'Estrategia Digital e Innovación',
-        tags: [{ label: 'Conferencia', type: 'conferencia' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Equipo Totalplay',
+        time: '10:50',
+        title: 'Nuevo Portal de Totalplay',
+        tags: [{ label: 'Conferencia', type: 'caso_exito' }],
+        description: 'Presentación de la experiencia y capacidades del nuevo portal',
+        speaker: 'Ana Ceci, Mariana Quintos, Mariana Nogal, JC y Eliceo',
     },
     {
         id: '8',
-        time: '11:40',
-        title: 'Descanso',
-        tags: [],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        isBreak: true,
+        time: '11:10',
+        title: 'Sesión Deloitte',
+        tags: [{label: 'Conferencia', type: 'conferencia' }],
+        description: 'Perspectivas y soluciones para la transformación digital',
+        speaker: 'Miguel Iza Moreno',
     },
     {
         id: '9',
-        time: '11:50',
-        title: 'App de Ventas',
-        tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Ana Ceci, Reynaldo Escobar y Felipe Jimenez',
+        time: '11:30',
+        title: 'Descanso',
+        tags: [],
+        description: 'Pausa de 10 minutos',
+        isBreak: true,
     },
     {
         id: '10',
-        time: '12:10',
-        title: 'Nuevo Portal de Totalplay',
+        time: '11:40',
+        title: 'FFM Cobranza',
         tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Ana Ceci, Mariana Quintos y Mariana Nogal',
+        description: 'Aplicación de tecnología para optimizar la operación  y gestión de cobranza',
+        speaker: 'Andrea Figueroa, Randy Castillo y Melina Castillo',
     },
     {
         id: '11',
-        time: '12:30',
-        title: 'FFM Cobranza',
-        tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Andrea Figueroa, Randy Aguayo, Melina Castillo',
+        time: '12:00',
+        title: 'AWS Cloud',
+        tags: [{ label: 'Conferencia', type: 'conferencia' }],
+        description: 'Soluciones y capacidades de nube para impulsar la innovación',
+        speaker: 'Daniel Morales',
     },
     {
         id: '12',
-        time: '12:50',
+        time: '12:30',
         title: 'Portal de PYMES',
         tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Fernando Campos y Ricardo Moreno',
+        description: 'Soluciones enfocadas en la experiencia del segmento empresarial',
+        speaker: 'Fernando Campos, Ricardo Moreno y Ricardo Ruíz',
     },
     {
         id: '13',
-        time: '13:10',
-        title: 'Portal de Sellers',
-        tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Andrea Figueroa, César Delgado',
+        time: '12:50',
+        title: 'Sesión Fortinet',
+        tags: [{ label: 'Conferencia', type: 'conferencia' }],
+        description: 'Tecnología y estrategias para fortalecer la ciberseguridad.',
+        speaker: 'Juan Carlos Sánchez',
     },
     {
         id: '14',
-        time: '13:30',
-        title: 'IA aplicada al diseño',
+        time: '13:20',
+        title: 'Portal de Sellers',
         tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Ramzy Hurrle y Melina Castillo',
+        description: 'Evolución de las herramientas digitales para la gestión comercial',
+        speaker: 'Andrea Figueroa, César Delgado',
     },
     {
         id: '15',
-        time: '13:50',
-        title: 'Palabras de cierre',
-        tags: [{ label: 'Cierre', type: 'cierre' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        speaker: 'Aurelio Saynes',
+        time: '13:40',
+        title: 'IA aplicada al diseño',
+        tags: [{ label: 'Caso de éxito', type: 'caso_exito' }],
+        description: 'Uso de Inteligencia Artificial para potenciar el  proceso de diseño de interfaces.',
+        speaker: 'Ramzy Hurrle, Marisol Laborie y Melina Castillo',
     },
     {
         id: '16',
         time: '14:00',
-        title: 'Comida',
-        tags: [],
-        description: 'Bienvenida institucional, presentación de la agenda',
-        isBreak: true,
+        title: 'Palabras de cierre',
+        tags: [{ label: 'Cierre', type: 'cierre' }],
+        description: 'Conclusiones y mensaje final de la jornada',
+        speaker: 'Aurelio Saynes',
     },
     {
         id: '17',
-        time: '15:00',
-        title: 'Convivencia',
+        time: '14:10',
+        endTime: '18:00',
+        title: 'Comida & Convivencia',
         tags: [{ label: 'Networking', type: 'networking' }],
-        description: 'Bienvenida institucional, presentación de la agenda',
+        description: 'Espacio de integración y networking.',
+        isHighlight: true,
     },
 ];
 
@@ -193,9 +197,9 @@ export const AgendaMakers: React.FC = () => {
             <div className="w-full max-w-[1280px] flex flex-col gap-[50px]">
                 {/* Encabezado */}
                 <div className="w-full max-w-[526px] flex flex-col items-start gap-1">
-          <span className="font-bold text-[18px] leading-[22px] text-[#BD45FF] text-left">
-            Agenda
-          </span>
+                    <span className="font-bold text-[18px] leading-[22px] text-[#BD45FF] text-left">
+                        Agenda
+                    </span>
                     <h2 className="font-bold text-[32px] sm:text-[40px] leading-[49px] text-white text-left">
                         Construye tu experiencia
                     </h2>
@@ -207,15 +211,27 @@ export const AgendaMakers: React.FC = () => {
                         <div
                             key={item.id}
                             className={`w-full min-h-[92px] p-[20px_24px] rounded-[20px] border border-white/14 shadow-[0px_2px_8px_rgba(0,0,0,0.2)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all duration-300 hover:border-white/30 ${
-                                item.isBreak ? 'bg-white/10 backdrop-blur-md' : 'bg-black/20 backdrop-blur-md'
+                                item.isHighlight
+                                    ? 'bg-white/10 backdrop-blur-md border-white/20'
+                                    : item.isBreak
+                                        ? 'bg-white/10 backdrop-blur-md'
+                                        : 'bg-black/20 backdrop-blur-md'
                             }`}
                         >
                             <div className="flex flex-col md:flex-row items-start md:items-center gap-[20px] w-full">
                                 {/* Columna Hora */}
-                                <div className="min-w-[60px] flex flex-col items-start justify-center">
-                  <span className="font-bold text-[18px] leading-[22px] text-[#38BDF8]">
-                    {item.time}
-                  </span>
+                                <div className="min-w-[60px] flex flex-col items-start justify-center gap-1">
+                                    <span className="font-bold text-[18px] leading-[22px] text-[#38BDF8]">
+                                        {item.time}
+                                    </span>
+                                    {item.endTime && (
+                                        <>
+                                            <div className="w-[49px] h-[0px] border-b border-[#C7C7C7] my-0.5" />
+                                            <span className="font-bold text-[18px] leading-[22px] text-[#38BDF8]">
+                                                {item.endTime}
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
 
                                 {/* Columna Contenido */}
@@ -236,8 +252,8 @@ export const AgendaMakers: React.FC = () => {
                                                             tag.type
                                                         )}`}
                                                     >
-                            {tag.label}
-                          </span>
+                                                        {tag.label}
+                                                    </span>
                                                 ))}
                                             </div>
                                         )}
@@ -266,8 +282,8 @@ export const AgendaMakers: React.FC = () => {
                                                         </svg>
                                                     </div>
                                                     <span className="font-normal text-[14px] leading-[20px] text-white">
-                            {item.speaker}
-                          </span>
+                                                        {item.speaker}
+                                                    </span>
                                                 </div>
                                             )}
 
@@ -286,8 +302,8 @@ export const AgendaMakers: React.FC = () => {
                                                         </svg>
                                                     </div>
                                                     <span className="font-normal text-[14px] leading-[20px] text-white">
-                            {item.location}
-                          </span>
+                                                        {item.location}
+                                                    </span>
                                                 </div>
                                             )}
                                         </div>
