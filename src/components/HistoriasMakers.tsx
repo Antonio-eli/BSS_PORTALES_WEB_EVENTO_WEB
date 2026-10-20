@@ -34,7 +34,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '1',
         name: 'Ricardo Moreno',
-        role: 'Project Leader',
+        role: 'Enterprise Solutions Manager',
         roleColor: '#38DD02', // Poison Green
         project: 'Nuevo Portal Totalplay',
         quote: 'La inteligencia artificial me permite acelerar el desarrollo de funcionalidades, detectar errores y generar pruebas con mayor rapidez. Así puedo concentrar mi experiencia en validar la lógica, optimizar el código y asegurar la calidad de cada implementación.',
@@ -46,7 +46,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '2',
         name: 'Juan Carlos',
-        role: 'Software Architect',
+        role: 'AI & Intelligent Systems Manager',
         roleColor: '#1877FF', // Super Sonic Blue
         project: 'Nuevo Portal Totalplay',
         quote: 'Construir el Portal requería velocidad y precisión. Al integrar la IA como mi asistente de código, asigné la implementación del stack y aceleré todo el flujo. Así, concentré mi experiencia en asegurar una integración impecable con Salesforce manteniendo los estándares de calidad al máximo.',
@@ -58,7 +58,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '3',
         name: 'Reynaldo Escobar',
-        role: 'Mobile Application Manager',
+        role: 'Mobile Engineering Manager',
         roleColor: '#3BF200', // Neon Green
         project: 'Rediseño App de Ventas Residencial',
         quote: 'Aproveché las capacidades de la Inteligencia Artificial para convertir los requerimientos en propuestas de interfaz, materiales de soporte y representaciones geográficas. Esto me permitió enfocarme en la validación técnica y la salida a producción.',
@@ -70,7 +70,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '4',
         name: 'Omar Morgado',
-        role: 'Mobile Application Developer',
+        role: 'Mobile App Developer',
         roleColor: '#00D3F3', // Bluefish
         project: 'Rediseño App de Ventas Residencial',
         quote: 'Para la App de Ventas, asigné a la IA las pantallas, mapas y documentación. Así, pude enfocar mi criterio técnico en auditar el código e integrar la lógica para salir a producción.',
@@ -82,7 +82,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '5',
         name: 'Ana Ceci',
-        role: 'Public Portal Manager',
+        role: 'Web Experience Manager',
         roleColor: '#00D492', // Billiard Aqua
         project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
         quote: 'Incorporé la inteligencia artificial para agilizar mi proceso de diseño UX/UI. A través de prompts, generé propuestas iniciales de pantallas y recorridos, lo que me permitió validar ideas, mejorar los flujos y adelantar detalles visuales.',
@@ -94,7 +94,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '6',
         name: 'Randy Castillo',
-        role: 'UX Design Lead',
+        role: 'App Developer',
         roleColor: '#FF8904', // Orange
         project: 'FFM Cobranza',
         quote: 'Integré la IA a mi flujo de desarrollo en la Migración de Cobranza a Flutter como apoyo para diagnosticar, implementar y documentar. Con reglas claras de verificación y revisión humana, mi ciclo de trabajo es más rápido y deja menos retrabajo, y las decisiones siguen siendo mías.',
@@ -106,7 +106,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '7',
         name: 'Melina Castillo',
-        role: 'UX/UI Design Lead',
+        role: 'UI/UX Designer',
         roleColor: '#F9459E', // Fandango Pink
         project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
         quote: 'Utilizamos la inteligencia artificial como una herramienta de apoyo durante las primeras etapas de diseño. Con prompts enfocados en las necesidades de cada proyecto, obtuvimos una base para visualizar pantallas y flujos, detectar oportunidades de mejora y desarrollar propuestas visuales con mayor rapidez.',
@@ -118,7 +118,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '8',
         name: 'Eliceo',
-        role: 'Project leader',
+        role: 'Principal AI Architect',
         roleColor: '#AC14FF', // Afterparty Purple
         project: 'Nuevo Portal Totalplay',
         quote: 'La Inteligencia Artificial me apoyó en la implementación técnica, lo que aceleró el proceso y me permitió concentrarme en garantizar una integración sólida con Salesforce y mantener altos estándares de calidad.',
@@ -130,7 +130,7 @@ const defaultMakersData: MakerCardItem[] = [
     {
         id: '9',
         name: 'Alfred',
-        role: 'Technology and Innovation Leader',
+        role: 'Head of Tech Innovation & Emerging Tech',
         roleColor: '#5E9BDE', // Little Boy Blue
         project: 'Nuevo Portal Totalplay, Rediseño App de Ventas Residencial',
         quote: 'Mediante la integración de plataformas como Claude Code, Notion y ChatGPT Codex, entre otras, fue posible rediseñar la nueva Torre NOC, transformar salas de juntas en espacios inteligentes, incorporar procesos agénticos en la nueva generación de FFM y desarrollar agentes que agilizan los procesos de diseño en Figma.',
