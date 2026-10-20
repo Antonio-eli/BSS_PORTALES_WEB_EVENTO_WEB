@@ -43,10 +43,10 @@ const TotalMakers: React.FC = () => {
                         </div>
                         <div className="flex flex-col items-start gap-[4px] flex-1 text-left">
                             <h3 className="font-bold text-[16.8px] leading-[25px] text-[#00D3F3]">
-                                Aprende
+                                Descubre
                             </h3>
                             <p className="font-normal text-[16px] leading-[20px] text-white">
-                                Descubre nuevas herramientas, metodologías y formas de trabajar con tecnología e inteligencia artificial.
+                                Explora el potencial de la inteligencia artificial y aprende a integrar nuevas tecnologías en tus actividades de todos los días.
                             </p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ const TotalMakers: React.FC = () => {
                                 Experimenta
                             </h3>
                             <p className="font-normal text-[16px] leading-[20px] text-white">
-                                Aplica el conocimiento en retos reales, pon a prueba tus ideas y construye prototipos funcionales.
+                                Convierte la información en resultados. Utiliza la tecnología para diseñar y adapatar herramientes que agillicen tu trabajo.
                             </p>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ const TotalMakers: React.FC = () => {
                                 Comparte
                             </h3>
                             <p className="font-normal text-[16px] leading-[20px] text-white">
-                                Conecta con otros creadores, intercambia experiencias y potencia el talento colectivo dentro de la comunidad.
+                                Conecta con una red de innovación Makers. Comparte buenas prácticas, resuelve retos en equipo y potencia tu desarrollo profesional.
                             </p>
                         </div>
                     </div>

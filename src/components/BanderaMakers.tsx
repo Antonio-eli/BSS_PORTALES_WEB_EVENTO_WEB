@@ -91,8 +91,13 @@ const BanderaMakers = () => {
 
                 {/* Banner Informativo Inferior */}
                 <div className="w-full max-w-[1332px] min-h-[82px] bg-[rgba(54,123,255,0.06)] border border-[rgba(54,123,255,0.15)] rounded-[16px] p-[20px_24px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)] flex items-center justify-center text-center">
-                    <p className="font-bold text-[16px] leading-[20px] text-[#35D8FF] max-w-[1134px]">
-                        ¿No sabes con quién hablar? Acércate a cualquier mesa con banderín y cuéntales en qué área trabajas. Ellos te orientarán hacia la persona o sesión indicada para ti.
+                    <p className="text-[16px] leading-[20px] max-w-[1134px]">
+                        <span className="font-bold text-[#60E0F0]">
+                            ¿No sabes con quién hablar?
+                        </span>{' '}
+                        <span className="font-normal text-[#B9BED0]">
+                            Acércate a cualquier mesa con banderín y cuéntales en qué área trabajas. Ellos te orientarán hacia la persona o sesión indicada para ti.
+                        </span>
                     </p>
                 </div>
 

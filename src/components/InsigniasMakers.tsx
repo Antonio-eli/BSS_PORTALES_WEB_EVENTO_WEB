@@ -154,7 +154,7 @@ const levelsData: Record<string, LevelContent> = {
         title: 'Total Creator',
         descriptionTitle: 'Convierte ideas en soluciones',
         description: 'Transforma una necesidad en un prototipo que puedas demostrar. Esta insignia reconoce tu capacidad para combinar datos, herramientas e inteligencia artificial y validar una solución con criterios claros.',
-        highlightText: 'Microsoft offers open materials and includes a local execution option without cloud subscription. Hugging Face declares its certification process free; Kaggle publishes designated courses at no cost.',
+        highlightText: 'Microsoft ofrece materiales abiertos e incluye una opción de ejecución local sin suscripción de nube. Hugging Face declara gratuito su proceso de certificación; Kaggle publica los cursos señalados sin costo. github.com',
         summaryColumns: [
             { title: 'Objetivo del nivel', description: 'Construir un prototipo funcional y comprender cómo intervienen los datos, los modelos y los agentes.' },
             { title: 'Cursos del nivel', description: 'Completar el bloque seleccionado de Microsoft y la unidad 1 de Hugging Face. Los cursos de Kaggle son complementarios.' }
@@ -197,7 +197,7 @@ const levelsData: Record<string, LevelContent> = {
         description: 'Conecta inteligencia artificial, datos y herramientas con una visión integral. Esta insignia reconoce tu capacidad para diseñar soluciones con controles de acceso, integración y evaluación de calidad, tiempos de respuesta y costos.',
         highlightText: 'Hugging Face confirma certificados gratuitos para MCP. Harvard distingue expresamente su certificado CS50 gratuito del certificado verificado de pago de edX.',
         summaryColumns: [
-            { title: 'Objetivo del nivel:', description: 'Diseñar integraciones confiables y justificar cómo se conectan las herramientas, los modelos y las fuentes de información.' },
+            { title: 'Objetivo del nivel:', description: 'Diseñar integraciones confiables y justificar cómo se conectan las herramientas, los modelos y las fuentes de información Hugging Face.' },
             { title: 'Cursos del nivel:', description: 'Completar Introduction to Model Context Protocol de Anthropic y las unidades 2 y 3 de AI Agents Course. Los demás son complementarios.' }
         ],
         courses: [
@@ -448,56 +448,85 @@ export const InsigniasMakers: React.FC = () => {
                     {isExpanded && (
                         <div className="flex flex-col gap-[36px] pt-4 border-t border-white/10 animate-fadeIn">
 
-                            {/* Sección de Cursos de Formación */}
+                            {/* Sección de Cursos de Formación con Glassmorphism Mejorado */}
                             {currentData.courses.length > 0 && (
                                 <div className="flex flex-col gap-3">
-                                    <h4 className="font-bold text-[18px] leading-[22px] text-[#35D8FF]">
+                                    <h4 className="font-bold text-[18px] leading-[22px] text-[#35D8FF] text-left">
                                         Formación
                                     </h4>
 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                                        {currentData.courses.map((course) => (
-                                            <div
-                                                key={course.id}
-                                                className="flex items-center justify-between p-3 sm:px-4 sm:py-3 bg-[#113C4F]/20 border border-[#25354B]/30 rounded-[10px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)]"
-                                            >
-                                                <div className="flex flex-col gap-2">
-                                                    <span
-                                                        className={`w-fit px-2 py-0.5 rounded-full text-[12px] font-semibold border ${
-                                                            course.type === 'Principal'
-                                                                ? 'bg-[#CC8FFF]/10 border-[#CC8FFF]/20 text-[#A856F7]'
-                                                                : course.type === 'Opción técnica'
-                                                                    ? 'bg-[#F9459E]/10 border-[#F9459E]/20 text-[#F9459E]'
-                                                                    : 'bg-[#FFB372]/10 border-[#FFB372]/20 text-[#FFB372]'
-                                                        }`}
-                                                    >
-                                                        {course.type}
-                                                    </span>
-                                                    <span className="font-normal text-[15px] sm:text-[16px] leading-[20px] text-white">
-                                                        {course.title}
-                                                    </span>
-                                                </div>
+                                        {currentData.courses.map((course) => {
+                                            // Configuración de colores y degradados estilo cristal por tipo
+                                            const isPrincipal = course.type === 'Principal';
+                                            const isOption = course.type === 'Opción técnica';
 
-                                                <a
-                                                    href={course.providerUrl || '#'}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="px-2.5 py-1 bg-[#367BFF]/10 border border-[#367BFF]/20 rounded-full font-bold text-[13px] sm:text-[14px] text-[#38BDF8] flex-shrink-0 hover:bg-[#367BFF]/20 hover:border-[#367BFF]/40 transition-colors flex items-center gap-1.5 group cursor-pointer"
-                                                    title="Ir al sitio del proveedor"
+                                            const badgeTextColor = isPrincipal
+                                                ? 'text-[#BD45FF]'
+                                                : isOption
+                                                    ? 'text-[#F9459E]'
+                                                    : 'text-[#FF8904]';
+
+                                            const badgeBgGradient = isPrincipal
+                                                ? 'linear-gradient(180deg, rgba(189, 69, 255, 0.22) 0%, rgba(189, 69, 255, 0.05) 100%)'
+                                                : isOption
+                                                    ? 'linear-gradient(180deg, rgba(249, 69, 158, 0.22) 0%, rgba(249, 69, 158, 0.05) 100%)'
+                                                    : 'linear-gradient(180deg, rgba(255, 137, 4, 0.22) 0%, rgba(255, 137, 4, 0.05) 100%)';
+
+                                            const badgeBorders = isPrincipal
+                                                ? 'border-t border-l border-[#BD45FF]/60 border-r border-b border-[#BD45FF]/20'
+                                                : isOption
+                                                    ? 'border-t border-l border-[#F9459E]/60 border-r border-b border-[#F9459E]/20'
+                                                    : 'border-t border-l border-[#FF8904]/60 border-r border-b border-[#FF8904]/20';
+
+                                            return (
+                                                <div
+                                                    key={course.id}
+                                                    className="flex items-center justify-between p-3.5 sm:px-4 sm:py-3.5 rounded-[12px] backdrop-blur-md border-t border-l border-white/35 border-r border-b border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:border-white/45 gap-3"
+                                                    style={{
+                                                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(0, 0, 0, 0.25) 100%)',
+                                                    }}
                                                 >
-                                                    <span>{course.provider}</span>
-                                                    <svg
-                                                        className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth="2"
-                                                        viewBox="0 0 24 24"
+                                                    <div className="flex flex-col gap-2 flex-1 min-w-0 pr-2">
+                                                        {/* Badge de Tipo con Cristal Biselado */}
+                                                        <span
+                                                            className={`w-fit px-2.5 py-0.5 rounded-full text-[12px] font-bold leading-[16px] backdrop-blur-sm shadow-[0_2px_6px_rgba(0,0,0,0.2)] ${badgeTextColor} ${badgeBorders}`}
+                                                            style={{ background: badgeBgGradient }}
+                                                        >
+                                {course.type}
+                            </span>
+
+                                                        {/* Título del curso */}
+                                                        <span className="font-medium text-[15px] sm:text-[16px] leading-[20px] text-white text-left break-words">
+                                {course.title}
+                            </span>
+                                                    </div>
+
+                                                    {/* Botón del Proveedor con Cristal Esmerilado */}
+                                                    <a
+                                                        href={course.providerUrl || '#'}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="px-3 py-1.5 rounded-full font-bold text-[13px] text-[#38BDF8] hover:text-[#35D8FF] backdrop-blur-md border-t border-l border-[#38BDF8]/60 border-r border-b border-[#38BDF8]/20 shadow-[0_4px_10px_rgba(0,0,0,0.25)] flex-shrink-0 transition-all hover:bg-white/10 active:scale-95 flex items-center gap-1.5 group cursor-pointer"
+                                                        style={{
+                                                            background: 'linear-gradient(180deg, rgba(56, 189, 248, 0.18) 0%, rgba(56, 189, 248, 0.04) 100%)',
+                                                        }}
+                                                        title="Ir al sitio del proveedor"
                                                     >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        ))}
+                                                        <span>{course.provider}</span>
+                                                        <svg
+                                                            className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            strokeWidth="2.2"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
@@ -506,7 +535,57 @@ export const InsigniasMakers: React.FC = () => {
                             {currentData.highlightText && (
                                 <div className="w-full px-6 py-3 bg-white/5 border border-white/10 rounded-[12px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)]">
                                     <p className="font-normal text-[16px] leading-[20px] text-white">
-                                        {currentData.highlightText}
+                                        {currentData.id === 'maker' ? (
+                                            <>
+                                                Google publica su formación introductoria sin costo; IBM confirma que la credencial indicada es gratuita y está disponible para usuarios registrados. Ingresa al siguiente Link para mayor información:{' '}
+                                                <a
+                                                    href="https://cloud.google.com/blog/topics/training-certifications/new-generative-ai-trainings-from-google-cloud?hl=en&utm_source=chatgpt.com"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#38BDF8] underline hover:text-[#00D3F3] font-semibold transition-colors"
+                                                >
+                                                    Google Cloud Blog
+                                                </a>
+                                            </>
+                                        ) : currentData.id === 'builder' ? (
+                                            <>
+                                                La gratuidad de Academy incluye sus reconocimientos. Kaggle publica Python e Intro to Programming como cursos sin costo y con certificado; Platzi confirma la opción gratuita de programación.{' '}
+                                                <a
+                                                    href="https://academy.claude.com/help/faq?utm_source=chatgpt.com"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#38BDF8] underline hover:text-[#00D3F3] font-semibold transition-colors"
+                                                >
+                                                    Claude Academy
+                                                </a>
+                                            </>
+                                        ) : currentData.id === 'architect' ? (
+                                            <>
+                                                Hugging Face confirma certificados gratuitos para MCP. Harvard distingue expresamente su certificado CS50 gratuito del certificado verificado de pago de edX.{' '}
+                                                <a
+                                                    href="https://huggingface.co/learn/mcp-course/en/unit0/introduction?utm_source=chatgpt.com"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#38BDF8] underline hover:text-[#00D3F3] font-semibold transition-colors"
+                                                >
+                                                    Hugging Face
+                                                </a>
+                                            </>
+                                        ) : currentData.id === 'master' ? (
+                                            <>
+                                                Microsoft Learn ofrece formación gratuita y registra la aprobación del módulo indicado; Kaggle publica Explainability sin costo y con certificado.{' '}
+                                                <a
+                                                    href="https://learn.microsoft.com/en-us/training/support/faq?utm_source=chatgpt.com&pivots=general"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#38BDF8] underline hover:text-[#00D3F3] font-semibold transition-colors"
+                                                >
+                                                    Microsoft Learn
+                                                </a>
+                                            </>
+                                        ) : (
+                                            currentData.highlightText
+                                        )}
                                     </p>
                                 </div>
                             )}
@@ -644,7 +723,10 @@ export const InsigniasMakers: React.FC = () => {
                             {currentData.nextLevelName && (
                                 <div className="w-full px-4 py-3 bg-white/10 border border-white/5 rounded-[12px] shadow-[0px_2px_8px_rgba(0,0,0,0.2)]">
                                     <span className="font-bold text-[18px] leading-[22px] text-white">
-                                        Siguiente nivel: {currentData.nextLevelName}
+                                        Siguiente nivel:{' '}
+                                        <span className="text-[#38BDF8]">
+                                            {currentData.nextLevelName}
+                                        </span>
                                     </span>
                                 </div>
                             )}

@@ -62,7 +62,7 @@ export const ComunidadMakers: React.FC<CommunitySectionProps> = ({
             <div className="w-full max-w-[1184px] flex flex-col gap-[14px]">
                 {/* Fila Superior (Height 329.06px en Desktop) */}
                 <div className="flex flex-col lg:flex-row gap-[14px] w-full lg:h-[329.06px]">
-                    {/* Card 1: com1.png (585px x 329.06px) */}
+                    {/* Card 1: com1.avif (585px x 329.06px) */}
                     <div className="w-full lg:w-[585px] h-[250px] sm:h-[329.06px] bg-[#090B14] rounded-[16px] overflow-hidden flex-shrink-0">
                         <img
                             src={images.workshopTop}
@@ -71,7 +71,7 @@ export const ComunidadMakers: React.FC<CommunitySectionProps> = ({
                         />
                     </div>
 
-                    {/* Card 2: com2.png (285.5px x 329.06px) */}
+                    {/* Card 2: com2.avif (285.5px x 329.06px) */}
                     <div className="w-full lg:w-[285.5px] h-[250px] sm:h-[329.06px] bg-[#090B14] rounded-[16px] overflow-hidden flex-shrink-0">
                         <img
                             src={images.presentation}
@@ -80,7 +80,7 @@ export const ComunidadMakers: React.FC<CommunitySectionProps> = ({
                         />
                     </div>
 
-                    {/* Card 3 Stacked: com3.png y com4.png (2 imág. x 157.53px) */}
+                    {/* Card 3 Stacked: com3.avif y com4.avif (2 imág. x 157.53px) */}
                     <div className="w-full lg:w-[285.5px] flex flex-col sm:flex-row lg:flex-col gap-[14px] h-full flex-shrink-0">
                         <div className="w-full h-[157.53px] bg-[#090B14] rounded-[16px] overflow-hidden flex-1">
                             <img
@@ -101,7 +101,7 @@ export const ComunidadMakers: React.FC<CommunitySectionProps> = ({
 
                 {/* Fila Inferior (Height 585px en Desktop) */}
                 <div className="flex flex-col lg:flex-row gap-[14px] w-full lg:h-[585px]">
-                    {/* Card 4: com5.png (585px x 585px) */}
+                    {/* Card 4: com5.avif (585px x 585px) */}
                     <div className="w-full lg:w-[585px] h-[350px] sm:h-[585px] bg-[#090B14] rounded-[16px] overflow-hidden flex-shrink-0">
                         <img
                             src={images.prototype}
@@ -110,7 +110,7 @@ export const ComunidadMakers: React.FC<CommunitySectionProps> = ({
                         />
                     </div>
 
-                    {/* Card 5 Stacked: com6.png y com7.png (2 imág. x 285.5px) */}
+                    {/* Card 5 Stacked: com6.avif y com7.avif (2 imág. x 285.5px) */}
                     <div className="w-full lg:w-[585px] flex flex-col sm:flex-row lg:flex-col gap-[14px] h-full flex-shrink-0">
                         <div className="w-full h-[250px] sm:h-[285.5px] bg-[#090B14] rounded-[16px] overflow-hidden flex-1">
                             <img
