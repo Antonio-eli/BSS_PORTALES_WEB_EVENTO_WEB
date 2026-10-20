@@ -8,6 +8,7 @@ import BanderaMakers from "../components/BanderaMakers.tsx";
 import InsigniasMakers from "../components/InsigniasMakers.tsx";
 import ComunidadMakers from "../components/ComunidadMakers.tsx";
 import HistoriasMakers from "../components/HistoriasMakers.tsx";
+import AsistenteMakers from "../components/AsistenteMakers.tsx";
 
 const Inicio = () => {
     return (
@@ -40,6 +41,9 @@ const Inicio = () => {
             <div id="comunidad">
                 <ComunidadMakers />
             </div>
+
+            {/* Asistente de IA flotante (esquina inferior derecha) */}
+            <AsistenteMakers />
         </div>
     );
 };
