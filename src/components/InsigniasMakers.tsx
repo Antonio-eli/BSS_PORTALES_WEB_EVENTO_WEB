@@ -342,7 +342,7 @@ export const InsigniasMakers: React.FC = () => {
                                         type="button"
                                     >
                                         <div
-                                            className={`w-[56px] h-[56px] rounded-full flex items-center justify-center transition-all duration-300 p-1.5 ${
+                                            className={`w-[56px] h-[56px] rounded-full overflow-hidden flex items-center justify-center transition-all duration-300 ${
                                                 isActive
                                                     ? 'bg-white/10 border border-white/20 shadow-[0px_0px_25px_rgba(56,189,248,0.4)] scale-110 z-10'
                                                     : isPassed
@@ -353,7 +353,7 @@ export const InsigniasMakers: React.FC = () => {
                                             <img
                                                 src={badge.badgeImg}
                                                 alt={badge.name}
-                                                className={`w-full h-full object-contain transition-opacity duration-300 ${
+                                                className={`w-full h-full object-cover scale-[1.65] transition-all duration-300 ${
                                                     isPassed ? 'opacity-100' : 'opacity-40 group-hover:opacity-75'
                                                 }`}
                                             />
