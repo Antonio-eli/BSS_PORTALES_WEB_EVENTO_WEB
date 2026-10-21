@@ -170,7 +170,7 @@ export const HeroMakers: React.FC = () => {
                                 />
                             </svg>
                         </div>
-                        <span>08:30 — 18:00 hrs</span>
+                        <span>08:30 — 19:00 hrs</span>
                     </div>
                 </div>
 
