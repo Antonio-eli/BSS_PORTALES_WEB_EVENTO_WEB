@@ -48,7 +48,7 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(16px) scale(0.96)' },
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
-        // Balanceo del casco; su periodo no coincide con el de flotar para que el vaivén no se repita igual
+        // Balanceo del personaje; su periodo no coincide con el de flotar para que el vaivén no se repita igual
         mecer: {
           '0%, 100%': { transform: 'translateX(-2px) rotate(-5deg)' },
           '50%': { transform: 'translateX(2px) rotate(5deg)' },
@@ -58,16 +58,36 @@ const config: Config = {
           '0%, 38%, 42%, 85%, 89%, 93%, 100%': { transform: 'scaleY(1)' },
           '40%, 87%, 91%': { transform: 'scaleY(0.1)' },
         },
-        // Los ojos voltean hacia la burbuja y luego hacia arriba
+        // Los ojos voltean hacia la burbuja y luego hacia arriba; cada personaje escala el recorrido
+        // con --mirada-x y --mirada-y según el tamaño de sus ojos
         mirar: {
           '0%, 18%, 44%, 58%, 80%, 100%': { transform: 'translate(0, 0)' },
-          '22%, 40%': { transform: 'translate(-5%, 1%)' },
-          '62%, 76%': { transform: 'translate(4%, -3%)' },
+          '22%, 40%': { transform: 'translate(calc(-5% * var(--mirada-x, 1)), calc(1% * var(--mirada-y, 1)))' },
+          '62%, 76%': { transform: 'translate(calc(4% * var(--mirada-x, 1)), calc(-3% * var(--mirada-y, 1)))' },
         },
-        // Luz bajo el casco: más chica y tenue cuando el casco está arriba
+        // Luz bajo el personaje: más chica y tenue cuando está arriba
         sombra: {
           '0%, 100%': { transform: 'scaleX(1)', opacity: '1' },
           '50%': { transform: 'scaleX(0.7)', opacity: '0.45' },
+        },
+        // Un destello del rayo: aparece, titila y se apaga
+        chispazo: {
+          '0%': { opacity: '0' },
+          '10%, 40%': { opacity: '1' },
+          '25%': { opacity: '0.3' },
+          '100%': { opacity: '0' },
+        },
+        // Fogonazo donde pega el rayo
+        impacto: {
+          '0%': { opacity: '0', transform: 'scale(0.2)' },
+          '20%': { opacity: '1' },
+          '100%': { opacity: '0', transform: 'scale(1.6)' },
+        },
+        // Entrada del personaje recién elegido: crece girando y se asienta
+        cambio: {
+          '0%': { opacity: '0', transform: 'scale(0.5) rotate(-12deg)' },
+          '60%': { opacity: '1', transform: 'scale(1.12) rotate(4deg)' },
+          '100%': { opacity: '1', transform: 'scale(1) rotate(0)' },
         },
       },
       animation: {
@@ -83,6 +103,9 @@ const config: Config = {
         parpadear: 'parpadear 7s ease-in-out infinite',
         mirar: 'mirar 9s ease-in-out infinite',
         sombra: 'sombra 4s ease-in-out infinite',
+        chispazo: 'chispazo 0.7s ease-out both',
+        impacto: 'impacto 0.9s ease-out 0.05s both',
+        cambio: 'cambio 0.5s ease-out both',
       },
     },
   },
