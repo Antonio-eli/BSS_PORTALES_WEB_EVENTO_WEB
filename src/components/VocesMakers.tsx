@@ -57,7 +57,7 @@ const speakersData: Speaker[] = [
         name: 'Daniel Morales',
         role: 'Technical Account Manager',
         company: 'AWS',
-        topic: 'Claude Force',
+        topic: 'Claude Code',
         accentColor: '#00D492',
         badgeBg: '#00D492',
         badgeBorder: '#367BFF',
